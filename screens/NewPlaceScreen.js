@@ -9,6 +9,7 @@ import * as placesActions from '../store/places-action'
 const NewPlaceScreen = (props) =>{
 
     const [titleValue,setTitleValue] = useState('')
+    const [seletedImage,setSelectedImage] = useState()
 
     const dispatch = useDispatch()
 
@@ -16,8 +17,12 @@ const NewPlaceScreen = (props) =>{
         setTitleValue(text)
     }
 
+    const ImageTakenHandler = imagePath =>{
+        setSelectedImage(imagePath)
+    }
+
     const savePlaceHandler = () =>{
-        dispatch(placesActions.addPlace(titleValue))
+        dispatch(placesActions.addPlace(titleValue,seletedImage))
         props.navigation.goBack()
     }
 
@@ -26,8 +31,8 @@ const NewPlaceScreen = (props) =>{
         <View style={styles.form}>
             <Text style={styles.label}>Title</Text>
             <TextInput style={styles.textInput} onChangeText={(e)=>titleChangeHandler(e)} value={titleValue}/>
+            <ImgPicker onImageTaken={ImageTakenHandler}/>
             <Button title="Save Place" color={Colors.primary} style={styles.btn} onPress={()=>{savePlaceHandler()}}/>
-            <ImgPicker/>
         </View>
         </ScrollView>
     )
@@ -49,7 +54,7 @@ textInput:{
     paddingHorizontal:2
 },
 btn:{
-    marginBottom:100
+marginVertical:10
 }
 })
 
