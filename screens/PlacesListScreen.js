@@ -1,8 +1,10 @@
 import React,{useEffect} from 'react'
-import { Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
 import CustomHeaderButton from '../components/HeaderButton';
 import { HeaderButtons,Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
+import PlaceItem from '../components/PlaceItem';
 const PlaceListScreen = (props) =>{
 
     useEffect(() => {
@@ -20,13 +22,17 @@ const PlaceListScreen = (props) =>{
         }, [props.navigation]);
     
 
-
+    const places  = useSelector(state=> state.places.places)
 
     return (
-        <View>
-            <Text>Place List Screen</Text>
-        </View>
-    )
+    <FlatList 
+    data={places}
+    renderItem={itemData => <PlaceItem 
+        image={null}
+        title={itemData.item.title}
+        address={null}
+        onSelect={()=>props.navigation.navigate('PlaceDetail',{title:itemData.item.title,id:itemData.item.id})}/>}/>
+        )
 }
 
 
