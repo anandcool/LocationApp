@@ -11,13 +11,13 @@ import * as placesAction from '../store/places-action'
 const PlaceListScreen = (props) =>{
 
     const places  = useSelector(state=> state.places.places)
-    console.log("places",places)
+    // console.log("places",places)
     const dispatch = useDispatch()
 
     useEffect(()=>{
       dispatch(placesAction.loadPlaces())
   
-      console.log("hell",places)
+      // console.log("hell",places)
     },[dispatch])
 
     useEffect(() => {

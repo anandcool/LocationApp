@@ -12,8 +12,8 @@ export const addPlace = (title,image) =>{
         const fileName = image.split('/').pop()
 
         const newPath = FileSystem.documentDirectory + fileName;
-        console.log("newPath",newPath);
-        console.log("image",image)
+        // console.log("newPath",newPath);
+        // console.log("image",image)
         
         try {
             await FileSystem.moveAsync({
